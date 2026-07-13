@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- ========================================================== -->
+<!-- FILE: network_security_config.xml                          -->
+<!-- FUNGSI: Mengatur kebijakan keamanan untuk koneksi network  -->
+<!-- ========================================================== -->
+
+<network-security-config>
+
+    <!-- Konfigurasi dasar: blokir semua komunikasi HTTP (hanya izinkan HTTPS) -->
+    <!-- Ini adalah konfigurasi untuk tahap PRODUCTION                        -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" /> <!-- Hanya percaya certificate system -->
+        </trust-anchors>
+    </base-config>
+
+    <!-- ========================================================== -->
+    <!-- KONFIGURASI KHUSUS UNTUK DEVELOPMENT                       -->
+    <!-- HAPUS blok ini sebelum rilis ke Play Store!                -->
+    <!-- ========================================================== -->
+    <domain-config cleartextTrafficPermitted="true">
+        <!-- 192.168.0.127 adalah alamat ip untuk emulator Android (ldplayer) -->
+        <domain includeSubdomains="true">10.113.162.138</domain>
+
+        <!-- 10.0.2.2 adalah alamat localhost untuk emulator Android -->
+        <domain includeSubdomains="true">10.0.2.2</domain>
+
+        <!-- localhost untuk development di perangkat fisik -->
+        <domain includeSubdomains="true">localhost</domain>
+
+        <!-- Ganti dengan IP komputer Anda jika menggunakan perangkat fisik -->
+        <!-- Contoh: <domain includeSubdomains="true">192.168.1.100</domain> -->
+    </domain-config>
+
+</network-security-config>
